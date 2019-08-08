@@ -1,8 +1,8 @@
-![Docker Stars Shield](https://img.shields.io/docker/stars/kmb32123/youtube-dl-server.svg?style=flat-square)
-![Docker Pulls Shield](https://img.shields.io/docker/pulls/kmb32123/youtube-dl-server.svg?style=flat-square)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/manbearwiz/youtube-dl-server/master/LICENSE)
 
-# youtube-dl-server
+# shawngmc/youtube-dl-server
+
+A fork of youtube-dl-server that is proxy-compliant
 
 Very spartan Web and REST interface for downloading youtube videos onto a server. [`bottle`](https://github.com/bottlepy/bottle) + [`youtube-dl`](https://github.com/rg3/youtube-dl).
 
@@ -47,18 +47,18 @@ Downloads can be triggered by supplying the `{{url}}` of the requested video thr
 
 #### HTML
 
-Just navigate to `http://{{host}}:8080/youtube-dl` and enter the requested `{{url}}`.
+Just navigate to `http://{{host}}:8080` and enter the requested `{{url}}`.
 
 #### Curl
 
 ```shell
-curl -X POST --data-urlencode "url={{url}}" http://{{host}}:8080/youtube-dl/q
+curl -X POST --data-urlencode "url={{url}}" http://{{host}}:8080/q
 ```
 
 #### Fetch
 
 ```javascript
-fetch(`http://${host}:8080/youtube-dl/q`, {
+fetch(`http://${host}:8080/q`, {
   method: "POST",
   body: new URLSearchParams({
     url: url,
@@ -72,7 +72,7 @@ fetch(`http://${host}:8080/youtube-dl/q`, {
 Add the following bookmarklet to your bookmark bar so you can conviently send the current page url to your youtube-dl-server instance.
 
 ```javascript
-javascript:!function(){fetch("http://${host}:8080/youtube-dl/q",{body:new URLSearchParams({url:window.location.href,format:"bestvideo"}),method:"POST"})}();
+javascript:!function(){fetch("http://${host}:8080/q",{body:new URLSearchParams({url:window.location.href,format:"bestvideo"}),method:"POST"})}();
 ```
 
 ## Implementation
