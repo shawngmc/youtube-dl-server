@@ -28,6 +28,9 @@ app_defaults = {
 def dl_queue_list():
     return static_file('index.html', root='./')
 
+@app.route('/youtube-dl/')
+def dl_queue_list():
+    return static_file('index.html', root='./')
 
 @app.route('/youtube-dl/static/:filename#.*#')
 def server_static(filename):
