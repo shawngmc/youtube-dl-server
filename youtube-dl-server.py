@@ -17,32 +17,28 @@ app_defaults = {
     'YDL_EXTRACT_AUDIO_FORMAT': None,
     'YDL_EXTRACT_AUDIO_QUALITY': '192',
     'YDL_RECODE_VIDEO_FORMAT': None,
-    'YDL_OUTPUT_TEMPLATE': '/youtube-dl/%(title)s [%(id)s].%(ext)s',
+    'YDL_OUTPUT_TEMPLATE': '/%(title)s [%(id)s].%(ext)s',
     'YDL_ARCHIVE_FILE': None,
     'YDL_SERVER_HOST': '0.0.0.0',
     'YDL_SERVER_PORT': 8080,
 }
 
 
-@app.route('/youtube-dl')
+@app.route('/')
 def dl_queue_list():
     return static_file('index.html', root='./')
 
-@app.route('/youtube-dl/')
-def dl_queue_list():
-    return static_file('index.html', root='./')
-
-@app.route('/youtube-dl/static/:filename#.*#')
+@app.route('/static/:filename#.*#')
 def server_static(filename):
     return static_file(filename, root='./static')
 
 
-@app.route('/youtube-dl/q', method='GET')
+@app.route('/q', method='GET')
 def q_size():
     return {"success": True, "size": json.dumps(list(dl_q.queue))}
 
 
-@app.route('/youtube-dl/q', method='POST')
+@app.route('/q', method='POST')
 def q_put():
     url = request.forms.get("url")
     options = {
